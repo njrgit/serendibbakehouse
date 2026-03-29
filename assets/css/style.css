@@ -586,12 +586,6 @@ p {
 }
 
 
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 2rem;
-    align-items: center;
-}
-
 .experience-media {
     border-radius: 1.25rem;
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -853,6 +847,10 @@ blockquote cite {
 }
 
 /* About page */
+.about-hero > div > p + p {
+    margin-top: 1rem;
+}
+
 .about-pillars {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -899,6 +897,43 @@ blockquote cite {
     align-items: center;
     justify-content: space-between;
     background: linear-gradient(120deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.3));
+}
+
+.get-in-touch {
+    margin-top: 3rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.page-about main {
+    padding-bottom: 2rem;
+}
+
+.get-in-touch header {
+    margin-bottom: 1.5rem;
+}
+
+.contact-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.contact-details a {
+    display: block;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.2));
+    color: var(--amber);
+    text-decoration: none;
+    font-size: 1.05rem;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.contact-details a:hover {
+    border-color: rgba(242, 197, 92, 0.4);
+    background: rgba(255, 255, 255, 0.06);
 }
 
 /* Active nav state controlled via body data attribute */
