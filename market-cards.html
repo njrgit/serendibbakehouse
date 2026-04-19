@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Market Cards | Serendib Bakehouse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Josefin+Sans:wght@300;400;500&family=Pacifico&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --claret: #4e0505;
+            --garnet: #6f1a07;
+            --cardinal: #8c2f14;
+            --saffron: #f2c55c;
+            --amber: #fddc9c;
+            --ivory: #fff6e1;
+            --charcoal: #1c1814;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Josefin Sans', sans-serif;
+            background: #e8e8e8;
+            padding: 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            font-family: 'Pacifico', cursive;
+            color: var(--garnet);
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        .print-instructions {
+            text-align: center;
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 30px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ── Card ── */
+        .item-card {
+            background: var(--ivory);
+            border: 2px solid var(--saffron);
+            border-radius: 4px;
+            overflow: hidden;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            box-shadow: 0 4px 18px rgba(78, 5, 5, 0.18);
+            position: relative;
+        }
+
+        /* Decorative corner flourishes */
+        .item-card::before,
+        .item-card::after {
+            content: '';
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            border-color: var(--saffron);
+            border-style: solid;
+            opacity: 0.6;
+        }
+        .item-card::before {
+            top: 6px;
+            left: 6px;
+            border-width: 2px 0 0 2px;
+        }
+        .item-card::after {
+            bottom: 6px;
+            right: 6px;
+            border-width: 0 2px 2px 0;
+        }
+
+        /* Card header band */
+        .card-header {
+            background: linear-gradient(135deg, var(--claret) 0%, var(--garnet) 60%, var(--cardinal) 100%);
+            padding: 20px 24px 16px;
+            text-align: center;
+            position: relative;
+        }
+
+        .bakehouse-label {
+            font-family: 'Pacifico', cursive;
+            color: var(--saffron);
+            font-size: 0.78rem;
+            letter-spacing: 0.14em;
+            margin-bottom: 6px;
+            opacity: 0.9;
+        }
+
+        .item-name {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--ivory);
+            font-size: 1.9rem;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: 0.03em;
+        }
+
+        .item-subtitle {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--amber);
+            margin-top: 6px;
+            opacity: 0.85;
+        }
+
+        /* Card body */
+        .card-body {
+            padding: 20px 22px;
+            color: var(--charcoal);
+        }
+
+        .item-description {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.02rem;
+            line-height: 1.6;
+            color: #2a1a10;
+            font-style: italic;
+            margin-bottom: 16px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(78, 5, 5, 0.15);
+        }
+
+        .section-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--cardinal);
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .ingredients-text {
+            font-size: 0.72rem;
+            line-height: 1.65;
+            color: #3a2010;
+            letter-spacing: 0.03em;
+            margin-bottom: 14px;
+        }
+
+        .ingredients-text strong {
+            color: var(--garnet);
+            font-weight: 600;
+        }
+
+        /* Allergen box */
+        .allergen-box {
+            background: #fff3cd;
+            border: 1.5px solid #e6a817;
+            border-radius: 3px;
+            padding: 10px 12px;
+            margin-bottom: 12px;
+        }
+
+        .allergen-box .section-label {
+            color: #7a4a00;
+        }
+
+        .allergen-text {
+            font-size: 0.72rem;
+            line-height: 1.6;
+            color: #4a2e00;
+            letter-spacing: 0.03em;
+        }
+
+        .allergen-text strong {
+            font-weight: 600;
+        }
+
+        /* Storage row */
+        .storage-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 0.68rem;
+            color: #555;
+            letter-spacing: 0.04em;
+            margin-top: 2px;
+        }
+
+        .storage-icon {
+            flex-shrink: 0;
+            color: var(--cardinal);
+            font-size: 0.85rem;
+            margin-top: 1px;
+        }
+
+        /* Divider ornament */
+        .ornament {
+            text-align: center;
+            color: var(--saffron);
+            font-size: 0.9rem;
+            letter-spacing: 0.3em;
+            margin: 12px 0;
+            opacity: 0.6;
+        }
+
+        /* Footer strip */
+        .card-footer {
+            background: var(--claret);
+            padding: 8px 22px;
+            text-align: center;
+            font-size: 0.6rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--amber);
+            opacity: 0.9;
+        }
+
+        /* ── PRINT ── */
+        @media print {
+            @page {
+                size: A5 portrait;
+                margin: 10mm;
+            }
+
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .page-title,
+            .print-instructions {
+                display: none;
+            }
+
+            .cards-grid {
+                display: block;
+            }
+
+            .item-card {
+                width: 100%;
+                margin: 0;
+                page-break-after: always;
+                break-after: page;
+                box-shadow: none;
+            }
+
+            .item-card:last-child {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <p class="page-title">Serendib Bakehouse — Market Cards</p>
+    <p class="print-instructions">Print · Each card prints on a separate A5 page · Cut &amp; display at your stall</p>
+
+    <div class="cards-grid">
+
+        <!-- ── Card 1: Seeni Sambol Bun ── -->
+        <article class="item-card">
+            <div class="card-header">
+                <p class="bakehouse-label">Serendib Bakehouse</p>
+                <h2 class="item-name">Seeni Sambol Bun</h2>
+                <p class="item-subtitle">Freshly baked · Handcrafted · Small batch</p>
+            </div>
+            <div class="card-body">
+                <p class="item-description">
+                    Sweet, slow-caramelised onions cooked with chilli, tamarind, and spices — packed into a soft, freshly baked bun. A perfect balance of sweet, spicy, and tangy in every bite.
+                </p>
+
+                <div class="ornament">✦ ✦ ✦</div>
+
+                <p class="section-label">Ingredients</p>
+                <p class="ingredients-text">
+                    <strong>Wheat Flour (Gluten)</strong>, <strong>Milk (Dairy)</strong>, <strong>Egg</strong>, Water, <strong>Butter (Dairy)</strong>, Sugar, Yeast, Onions, Vegetable Oil (Coconut), Tamarind, Garlic, Dried Red Chillies, Chilli Powder, Turmeric, Salt, Curry Leaves
+                </p>
+
+                <div class="allergen-box">
+                    <p class="section-label">⚠ Allergen Information</p>
+                    <p class="allergen-text">
+                        <strong>Contains:</strong> Wheat (Gluten), Milk, Eggs<br />
+                        <strong>May contain:</strong> Nuts, Sesame, Soya
+                    </p>
+                </div>
+
+                <div class="storage-row">
+                    <span class="storage-icon">❄</span>
+                    <span>Refrigerate if not consuming immediately. Suitable for freezing.</span>
+                </div>
+            </div>
+            <div class="card-footer">serendibbakehouse.com &nbsp;·&nbsp; info@serendibbakehouse.com</div>
+        </article>
+
+        <!-- ── Card 2: Curry Beef Bun ── -->
+        <article class="item-card">
+            <div class="card-header">
+                <p class="bakehouse-label">Serendib Bakehouse</p>
+                <h2 class="item-name">Curry Beef Bun</h2>
+                <p class="item-subtitle">Freshly baked · Handcrafted · Small batch</p>
+            </div>
+            <div class="card-body">
+                <p class="item-description">
+                    Soft, fluffy bun filled with a bold Tamil-style Sri Lankan minced beef curry, slow-cooked with roasted spices, black pepper, and aromatic curry leaves. Warmth, spice, and softness in every bite.
+                </p>
+
+                <div class="ornament">✦ ✦ ✦</div>
+
+                <p class="section-label">Ingredients</p>
+                <p class="ingredients-text">
+                    <strong>Wheat Flour (Gluten)</strong>, Water, Yeast, Sugar, Salt, <strong>Milk (Dairy)</strong>, Butter/Oil, <strong>Egg</strong>, Beef Mince, Onion, Garlic, Ginger, Green Chilli, Curry Leaves, Coconut Oil, Black Pepper, Turmeric, Cumin, Coriander, Cinnamon, Cloves, Cardamom, Coconut Milk, Vinegar/Lime Juice
+                </p>
+
+                <div class="allergen-box">
+                    <p class="section-label">⚠ Allergen Information</p>
+                    <p class="allergen-text">
+                        <strong>Contains:</strong> Wheat (Gluten), Milk, Eggs<br />
+                        <strong>May contain:</strong> Mustard<br />
+                        <em>Coconut included for awareness.</em>
+                    </p>
+                </div>
+
+                <div class="storage-row">
+                    <span class="storage-icon">❄</span>
+                    <span>Refrigerate if not consuming immediately. Suitable for freezing.</span>
+                </div>
+            </div>
+            <div class="card-footer">serendibbakehouse.com &nbsp;·&nbsp; info@serendibbakehouse.com</div>
+        </article>
+
+        <!-- ── Card 3: Fish Curry Bun ── -->
+        <article class="item-card">
+            <div class="card-header">
+                <p class="bakehouse-label">Serendib Bakehouse</p>
+                <h2 class="item-name">Fish Curry Bun</h2>
+                <p class="item-subtitle">Freshly baked · Handcrafted · Small batch</p>
+            </div>
+            <div class="card-body">
+                <p class="item-description">
+                    Golden bun filled with a savory mix of spiced tuna and mashed potato, infused with aromatic curry spices and a hint of fresh lime. Sri Lanka's beloved bakery classic, made from scratch.
+                </p>
+
+                <div class="ornament">✦ ✦ ✦</div>
+
+                <p class="section-label">Ingredients</p>
+                <p class="ingredients-text">
+                    <strong>Wheat Flour (Gluten)</strong>, <strong>Milk (Dairy)</strong>, <strong>Fish (Tuna)</strong>, Potato, Onion, <strong>Egg</strong>, Butter (Dairy), Sugar, Yeast, Garlic, Green Chilli, Curry Powder, Turmeric, Chilli Powder, Salt, Pepper, Lime Juice, Curry Leaves
+                </p>
+
+                <div class="allergen-box">
+                    <p class="section-label">⚠ Allergen Information</p>
+                    <p class="allergen-text">
+                        <strong>Contains:</strong> Wheat (Gluten), Fish (Tuna), Milk, Eggs
+                    </p>
+                </div>
+
+                <div class="storage-row">
+                    <span class="storage-icon">❄</span>
+                    <span>Refrigerate if not consuming immediately. Suitable for freezing.</span>
+                </div>
+            </div>
+            <div class="card-footer">serendibbakehouse.com &nbsp;·&nbsp; info@serendibbakehouse.com</div>
+        </article>
+
+    </div>
+
+</body>
+</html>

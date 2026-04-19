@@ -1,0 +1,266 @@
+/* ============================================================
+   Serendib Bakehouse — Market Card Styles
+   Shared across all individual item cards
+   ============================================================ */
+
+:root {
+    --claret:   #4e0505;
+    --garnet:   #6f1a07;
+    --cardinal: #8c2f14;
+    --saffron:  #f2c55c;
+    --amber:    #fddc9c;
+    --ivory:    #fff6e1;
+    --charcoal: #1c1814;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Josefin Sans', sans-serif;
+    background: #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding: 30px 16px;
+}
+
+/* ── Screen utility bar ── */
+.screen-bar {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* ============================================================
+   Card shell
+   ============================================================ */
+.item-card {
+    background: var(--ivory);
+    width: 100%;
+    max-width: 420px;
+    border: 2px solid var(--saffron);
+    border-radius: 4px;
+    overflow: visible;
+    box-shadow: 0 6px 28px rgba(78, 5, 5, 0.22);
+    position: relative;
+}
+
+/* Corner flourishes */
+.item-card::before,
+.item-card::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-color: var(--saffron);
+    border-style: solid;
+    opacity: 0.55;
+    z-index: 1;
+    pointer-events: none;
+}
+.item-card::before {
+    top: 7px;
+    left: 7px;
+    border-width: 2px 0 0 2px;
+}
+.item-card::after {
+    bottom: 7px;
+    right: 7px;
+    border-width: 0 2px 2px 0;
+}
+
+/* ============================================================
+   Header band
+   ============================================================ */
+.card-header {
+    background: linear-gradient(150deg, var(--claret) 0%, var(--garnet) 55%, var(--cardinal) 100%);
+    padding: 22px 24px 18px;
+    text-align: center;
+    position: relative;
+}
+
+/* Subtle inner top border */
+.card-header::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    right: 5%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--saffron), transparent);
+    opacity: 0.4;
+}
+
+.card-logo {
+    width: 68px;
+    height: 68px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.45));
+}
+
+.bakehouse-name {
+    font-family: 'Pacifico', cursive;
+    color: var(--saffron);
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    line-height: 1;
+}
+
+.item-name {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--ivory);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+}
+
+.item-subtitle {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--amber);
+    margin-top: 8px;
+    opacity: 0.8;
+}
+
+/* ============================================================
+   Card body
+   ============================================================ */
+.card-body {
+    padding: 20px 22px 18px;
+    color: var(--charcoal);
+}
+
+.item-description {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    line-height: 1.62;
+    color: #2a1a10;
+    font-style: italic;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(78, 5, 5, 0.14);
+}
+
+/* Ornament divider */
+.ornament {
+    text-align: center;
+    color: var(--saffron);
+    font-size: 0.85rem;
+    letter-spacing: 0.35em;
+    margin: 10px 0 14px;
+    opacity: 0.55;
+}
+
+/* Section label */
+.section-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--cardinal);
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+/* Ingredients */
+.ingredients-text {
+    font-size: 0.73rem;
+    line-height: 1.68;
+    color: #3a2010;
+    letter-spacing: 0.03em;
+    margin-bottom: 14px;
+}
+.ingredients-text strong {
+    color: var(--garnet);
+    font-weight: 600;
+}
+
+/* Allergen box */
+.allergen-box {
+    background: #fff3cd;
+    border: 1.5px solid #e6a817;
+    border-radius: 3px;
+    padding: 10px 13px;
+    margin-bottom: 13px;
+}
+.allergen-box .section-label {
+    color: #7a4a00;
+}
+.allergen-text {
+    font-size: 0.72rem;
+    line-height: 1.62;
+    color: #4a2e00;
+    letter-spacing: 0.03em;
+}
+.allergen-text strong {
+    font-weight: 600;
+}
+
+/* Storage row */
+.storage-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.68rem;
+    color: #555;
+    letter-spacing: 0.04em;
+}
+.storage-icon {
+    flex-shrink: 0;
+    color: var(--cardinal);
+    font-size: 0.9rem;
+    margin-top: 0px;
+}
+
+/* ============================================================
+   Footer strip
+   ============================================================ */
+.card-footer {
+    background: var(--claret);
+    padding: 9px 22px;
+    text-align: center;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+}
+
+/* ============================================================
+   Print
+   ============================================================ */
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 12mm;
+    }
+
+    body {
+        background: white;
+        padding: 0;
+        display: block;
+    }
+
+    .screen-bar {
+        display: none;
+    }
+
+    .item-card {
+        max-width: 100%;
+        box-shadow: none;
+        border: 2px solid var(--saffron);
+    }
+}
